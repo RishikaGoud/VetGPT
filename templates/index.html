@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VetGPT - Ask a Veterinary Question</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Background Styling */
+        body {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color: #333;
+        }
+
+        /* Container Styling */
+        .container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Title Styling */
+        h1 {
+            font-size: 2.8em;
+            color: #007bb5;
+            margin-bottom: 20px;
+            font-weight: 700;
+            animation: popIn 0.5s ease;
+        }
+
+        /* Form Styling */
+        form {
+            margin-top: 20px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            margin-top: 10px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1em;
+            transition: all 0.3s;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #007bb5;
+            box-shadow: 0 0 8px rgba(0, 123, 181, 0.2);
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            margin-top: 15px;
+            background: linear-gradient(135deg, #4CAF50, #81C784);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.3s;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(135deg, #66BB6A, #388E3C);
+        }
+
+        /* Response Styling */
+        .response-section {
+            margin-top: 20px;
+            text-align: left;
+            background: #f1f8e9;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: slideUp 0.5s ease;
+        }
+
+        .response-section h2 {
+            font-size: 1.3em;
+            color: #007bb5;
+            margin-bottom: 8px;
+        }
+
+        .response-section p {
+            font-size: 1em;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .response-section a {
+            color: #388E3C;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .response-section a:hover {
+            color: #007bb5;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes popIn {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Title -->
+        <h1>VetGPT</h1>
+
+        <!-- Form -->
+        <form action="/search" method="POST">
+            <input type="text" name="query" placeholder="Type your question here" required>
+            <button type="submit">Ask a Veterinary Question</button>
+        </form>
+
+        <!-- Display Query and Response -->
+        {% if query %}
+            <div class="response-section">
+                <h2>Your Query:</h2>
+                <p>{{ query }}</p>
+            </div>
+        {% endif %}
+
+        {% if response %}
+            <div class="response-section">
+                <h2>Response:</h2>
+                <p><strong>Title:</strong> {{ response.title }}</p>
+                <p><strong>Description:</strong> {{ response.description }}</p>
+                <p><strong>URL:</strong> <a href="{{ response.url }}" target="_blank">{{ response.url }}</a></p>
+            </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>
