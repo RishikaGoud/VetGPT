@@ -21,7 +21,7 @@ Ensure you have the following installed:
 ### Steps
 1. Clone the repository:
    ```sh
-   git clone https://github.com/SasaunkVanamali/VetGPT.git
+   git clone https://github.com/RishikaGoud/VetGPT.git
    cd VetGPT
 2. Install dependencies:
    pip install -r requirements.txt
